@@ -12,9 +12,7 @@ const Register = () => {
 
     const handleRegister = async (data) => {
         console.log(data)
-        await axios.post("http://localhost:8080/user/register",{
-            data
-        })
+        await axios.post("http://localhost:8080/user/register",data)
     }
 
     return (
