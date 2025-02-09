@@ -1,6 +1,6 @@
-import { useState } from 'react'
-import { useForm } from 'react-hook-form'
-import React from 'react'
+import axios from 'axios';
+import React from 'react';
+import { useForm } from 'react-hook-form';
 
 const Register = () => {
 
@@ -10,8 +10,11 @@ const Register = () => {
         formState: { errors },
     } = useForm();
 
-    const handleRegister = (data) => {
+    const handleRegister = async (data) => {
         console.log(data)
+        await axios.post("http://localhost:8080/user/register",{
+            data
+        })
     }
 
     return (
@@ -23,15 +26,15 @@ const Register = () => {
                 </div>
                 <hr className='border-gray-300'></hr>
                 <div className=''>
-                    <form action="" onSubmit={handleSubmit(handleRegister)} className='flex flex-col gap-5'>
+                    <form action="POST" onSubmit={handleSubmit(handleRegister)} className='flex flex-col gap-5'>
                         <div className='flex flex-col gap-3'>
-                            <label htmlFor="fullname">Enter Your Full Name:</label>
-                            <input type="text" required placeholder='Full Name' {...register("fullname")} className='border-2 border-gray-200 rounded-md px-1 py-0.5' name='fullname' />
+                            <label htmlFor="name">Enter Your Full Name:</label>
+                            <input type="text" required placeholder='Full Name' {...register("name")} className='border-2 border-gray-200 rounded-md px-1 py-0.5' name='name' />
                             <label htmlFor="email">Enter Your Email:</label>
                             <input type="email" required placeholder='Email' {...register("email")} className='border-2 border-gray-200 rounded-md px-1 py-0.5' name='email' />
-                            <label htmlFor="pass">Enter Your Password:</label>
-                            <input type="password" required placeholder='Set Password' {...register("pass", { minLength: { value: 4, message: "Min length of password is 4" } })} className='border-2 border-gray-200 rounded-md px-1 py-0.5' name='pass' />
-                            {errors.pass && <div className='text-red-600 text-xs'>{errors.pass.message}</div>}
+                            <label htmlFor="password">Enter Your Password:</label>
+                            <input type="password" required placeholder='Set Password' {...register("password", { minLength: { value: 4, message: "Min length of password is 4" } })} className='border-2 border-gray-200 rounded-md px-1 py-0.5' name='password' />
+                            {errors.password && <div className='text-red-600 text-xs'>{errors.password.message}</div>}
                         </div>
                         <hr className='border-gray-300'></hr>
                         <div>

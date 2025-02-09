@@ -1,23 +1,24 @@
-const bcrypt = require("bcrypt");
+//const bcrypt = require("bcrypt");
 const userModel = require("../models/userModel");
 const jwt = require("jsonwebtoken");
 const registerController = async (req, res) => {
   try {
     const existingUser = await userModel.findOne({ email: req.body.email });
     if (existingUser) {
-      return res.ststus(200).send({
+      return res.status(200).send({
         success: false,
         message: "User already existes",
       });
     }
-    const salt = await bcrypt.genSalt(10);
-    const hashedPassword = await bcrypt.hash(req.body.password, salt);
-    req.body.password = hashedPassword;
+    //const salt = await bcrypt.genSalt(10);
+    //const hashedPassword = await bcrypt.hash(req.body.password, salt);
+    //req.body.password = hashedPassword;
     const user = new userModel(req.body);
     await user.save();
     const token = jwt.sign({ userId: user._id }, process.env.JWT_SECRET, {
       expiresIn: "1d",
     });
+    console.log(user);
     return res.status(201).send({
       success: true,
       message: "User Registered successfully",
