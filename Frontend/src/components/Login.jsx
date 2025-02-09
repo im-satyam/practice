@@ -63,7 +63,7 @@ const Login = () => {
                         <div className='altRoute flex flex-col justify-center items-center'>
                             <span className=''>Don't have an account?</span>
                             <span className='text-sky-600'>
-                                <Link to="/register" className='cursor-pointer font-semibold text-md'>Sign in!</Link>
+                                <Link to="/register" className='cursor-pointer font-semibold text-md'>Register!</Link>
                             </span>
                         </div>
                     </div>
