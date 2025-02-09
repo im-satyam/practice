@@ -1,15 +1,27 @@
-import { useState } from 'react'
 import './App.css'
 import Register from './components/Register'
+import Login from './components/Login'
+import Home from './components/Home'
+import { createBrowserRouter, RouterProvider } from 'react-router-dom'
 
 function App() {
-  const [count, setCount] = useState(0)
-
+  const router = createBrowserRouter([
+    {
+      path: "/",
+      element: <><Home /></>
+    },
+    {
+      path: "/login",
+      element: <><Login /></>
+    },
+    {
+      path: "/register",
+      element: <><Register /></>
+    },
+  ])
   return (
     <>
-    <main className='w-screen h-screen flex justify-center items-center bg-white'> 
-      <Register/>
-    </main>
+      <RouterProvider router={router} />
     </>
   )
 }
