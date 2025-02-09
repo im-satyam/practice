@@ -12,7 +12,7 @@ const Register = () => {
 
     const handleRegister = async (data) => {
         console.log(data)
-        await axios.post("http://localhost:8080/user/register",data)
+        await axios.post("http://localhost:8080/user/register", data)
     }
 
     return (
@@ -27,11 +27,34 @@ const Register = () => {
                     <form action="POST" onSubmit={handleSubmit(handleRegister)} className='flex flex-col gap-5'>
                         <div className='flex flex-col gap-3'>
                             <label htmlFor="name">Enter Your Full Name:</label>
-                            <input type="text" required placeholder='Full Name' {...register("name")} className='border-2 border-gray-200 rounded-md px-1 py-0.5' name='name' />
+                            <input
+                                type="text"
+                                placeholder='Full Name'
+                                {...register("name", { required: "Full Name is required" })}
+                                className='border-2 border-gray-200 rounded-md px-1 py-0.5'
+                                name='name' />
+
+                            {errors.name && <div className="text-red-600 text-xs">{errors.name.message}</div>}
+
                             <label htmlFor="email">Enter Your Email:</label>
-                            <input type="email" required placeholder='Email' {...register("email")} className='border-2 border-gray-200 rounded-md px-1 py-0.5' name='email' />
+
+                            <input
+                                type="email"
+                                placeholder='Email'
+                                {...register("email", { required: "Email is required" })}
+                                className='border-2 border-gray-200 rounded-md px-1 py-0.5'
+                                name='email' />
+
+                            {errors.email && <div className="text-red-600 text-xs">{errors.email.message}</div>}
+
                             <label htmlFor="password">Enter Your Password:</label>
-                            <input type="password" required placeholder='Set Password' {...register("password", { minLength: { value: 4, message: "Min length of password is 4" } })} className='border-2 border-gray-200 rounded-md px-1 py-0.5' name='password' />
+
+                            <input
+                                type="password"
+                                placeholder='Set Password'
+                                {...register("password", { minLength: { value: 4, message: "Min length of password is 4" } })} className='border-2 border-gray-200 rounded-md px-1 py-0.5'
+                                name='password' />
+
                             {errors.password && <div className='text-red-600 text-xs'>{errors.password.message}</div>}
                         </div>
                         <hr className='border-gray-300'></hr>
