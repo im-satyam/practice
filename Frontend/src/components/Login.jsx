@@ -13,8 +13,17 @@ const Login = () => {
     } = useForm();
 
     const handleLogin = async (data) => {
-        console.log(data)
-        await axios.post("http://localhost:8080/user/register", data)
+        await axios.post("http://localhost:8080/user/login", data)
+    }
+    
+    const recieveData = async () => {
+        await axios.get("http://localhost:8080/user/login").then(
+            res => {
+                const resData = res.data;
+                console.log(resData);
+            }
+        )
+
     }
 
     return (
