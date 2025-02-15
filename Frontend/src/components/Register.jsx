@@ -12,7 +12,6 @@ const Register = () => {
     } = useForm();
 
     const handleRegister = async (data) => {
-        console.log(data)
         await axios.post("http://localhost:8080/user/register", data)
     }
 
