@@ -57,6 +57,7 @@ const loginController = async (req, res) => {
     const token = jwt.sign({ userId: user._id }, process.env.JWT_SECRET, {
       expiresIn: "1d",
     });
+    console.log(user);
     return res.status(200).send({
       success: true,
       message: "Login Successfully",

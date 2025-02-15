@@ -13,20 +13,12 @@ const Login = () => {
     } = useForm();
 
     const handleLogin = async (data) => {
-        await axios.post("http://localhost:8080/user/login", data)
-        recieveData(data.email,data.pass)
-
-    }
-    
-    const recieveData = async (email,pass) => {
-        await axios.get("http://localhost:8080/user/login", {params: {email,pass}})
-            .then(res => {
-                const resData = res.data;
-                console.log(resData);
-            })
-            .catch(error => {
-                console.error(error);
-              });
+        try {
+            const response = await axios.post("http://localhost:8080/user/login", data);
+            console.log(response.data)
+        } catch (error) {
+            console.error("Login error: ", error.response?.data || error.message);
+        }
     }
 
     return (
