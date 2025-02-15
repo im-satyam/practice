@@ -14,16 +14,19 @@ const Login = () => {
 
     const handleLogin = async (data) => {
         await axios.post("http://localhost:8080/user/login", data)
+        recieveData()
+
     }
     
     const recieveData = async () => {
-        await axios.get("http://localhost:8080/user/login").then(
-            res => {
+        await axios.get("http://localhost:8080/user/login")
+            .then(res => {
                 const resData = res.data;
                 console.log(resData);
-            }
-        )
-
+            })
+            .catch(error => {
+                console.error(error);
+              });
     }
 
     return (
