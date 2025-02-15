@@ -14,12 +14,12 @@ const Login = () => {
 
     const handleLogin = async (data) => {
         await axios.post("http://localhost:8080/user/login", data)
-        recieveData()
+        recieveData(data.email,data.pass)
 
     }
     
-    const recieveData = async () => {
-        await axios.get("http://localhost:8080/user/login")
+    const recieveData = async (email,pass) => {
+        await axios.get("http://localhost:8080/user/login", {params: {email,pass}})
             .then(res => {
                 const resData = res.data;
                 console.log(resData);
