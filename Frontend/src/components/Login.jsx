@@ -1,22 +1,20 @@
 import axios from 'axios';
-import React from 'react';
-import { useEffect } from 'react';
+import React, { useEffect } from 'react';
 import { useForm } from 'react-hook-form';
-import { Link, Navigate } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 
 
 const Login = () => {
 
-    useEffect(() => {
-      const tkn = localStorage.getItem('userToken');
-      if (tkn !== "") {
-        return <Navigate to="/" replace />;
-      }
-    
-    }, [])
-    
+    const navigate = useNavigate();
 
-    let curToken = '';
+    useEffect(() => {
+        const tkn = localStorage.getItem('userToken');
+        if (tkn) {
+            navigate('/');
+        }
+    }, [navigate]);
+    
 
     const {
         register,
@@ -29,7 +27,7 @@ const Login = () => {
             const response = await axios.post("http://localhost:8080/user/login", data);
             curToken = response.data.token;
             localStorage.setItem('userToken',curToken)
-            return <Navigate to="/" replace />;
+            navigate('/',{replace: true})
         } catch (error) {
             console.error("Login error: ", error.response?.data || error.message);
         }
