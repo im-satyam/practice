@@ -1,8 +1,7 @@
-import React from 'react'
-import { useState, useEffect } from 'react';
-import { motion } from 'framer-motion';
-import { useNavigate } from 'react-router-dom';
 import axios from 'axios';
+import { motion } from 'framer-motion';
+import React, { useEffect, useState } from 'react';
+import { useNavigate } from 'react-router-dom';
 
 const User = () => {
 
@@ -18,7 +17,7 @@ const User = () => {
 
     const fetchUserData = async () => {
         try {
-            const response = await axios.post("http://localhost:8080/user/login", localStorage.getItem('userToken'));
+            const response = await axios.get("http://localhost:8080/user/current-user", localStorage.getItem('userToken'));
             setName(response.data.name);
             setMail(response.data.mail);
         } catch (error) {

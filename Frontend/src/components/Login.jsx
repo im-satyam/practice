@@ -25,7 +25,7 @@ const Login = () => {
     const handleLogin = async (data) => {
         try {
             const response = await axios.post("http://localhost:8080/user/login", data);
-            curToken = response.data.token;
+            let curToken = response.data.token;
             localStorage.setItem('userToken',curToken)
             navigate('/',{replace: true})
         } catch (error) {
